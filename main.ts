@@ -14,6 +14,7 @@ const DEFAULT_SETTINGS: MyPluginSettings = {
 
 export default class MyPlugin extends Plugin {
 	settings: MyPluginSettings
+	filenamePattern: RegExp = /^(.+?)(?:\.png)?(?:\.md)?$/
 	screenShotPath: string
 
 	async onload() {
@@ -100,7 +101,10 @@ export default class MyPlugin extends Plugin {
 	}
 
 	resourcePathBy(filePath: string): string {
-		return `resources/${filePath.substring(0, filePath.indexOf('.')).trim()}`;
+		let matched: RegExpMatchArray | null = filePath.match(this.filenamePattern)
+		if (matched)
+			return `resources/${matched[1].trim()}`;
+		return `resources/${filePath}`
 	}
 
 
