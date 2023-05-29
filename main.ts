@@ -54,7 +54,9 @@ export default class MyPlugin extends Plugin {
 	newFileHandler(file: TAbstractFile) {
 		if (this.markdownFile(file)) {
 			let resourcePath: string = this.resourcePath(file)
-			this.app.vault.createFolder(resourcePath)
+			let resourcePathFolder: TAbstractFile | null = this.app.vault.getAbstractFileByPath(resourcePath)
+			if (!resourcePathFolder)
+				this.app.vault.createFolder(resourcePath)
 		}
 
 		if (this.pngFile(file)) {
