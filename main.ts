@@ -17,7 +17,7 @@ export default class MyPlugin extends Plugin {
 	filenamePattern: RegExp = /^(.+?)(?:\.png)?(?:\.md)?$/
 	imgRegExp: RegExp = /^!\[(.*?)]\(resources\/.+\.png\)$/
 	screenShotPath: string
-	activeFileContent: string
+	activeFileContent: string = ''
 	activeFileName: String
 
 	async onload() {
